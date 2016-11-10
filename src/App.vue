@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <img class="logo" src="./assets/logo.png">
-    <p>
-      Welcome to your Vue.js app!
-    </p>
     <router-view class="view one"></router-view>
     <router-view class="view one" name="a"></router-view>
+    
     <router-link to="/login">login</router-link>
     <router-link to="/">home</router-link>
+    <router-link to="/userinfo">userinfo</router-link>
   </div>
 </template>
 
