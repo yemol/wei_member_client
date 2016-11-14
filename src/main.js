@@ -10,6 +10,19 @@ Vue.use(VueRouter)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data: {
+    currentRoute: window.location.pathname
+  },
   router,
-  render: (h) => { return h(App) }
+  computed: {
+    ViewComponent () {
+      console.log(this.currentRoute)
+      return App
+    }
+  },
+  render (h) { return h(this.ViewComponent) }
+  // render: (h) => {
+  //   console.log(this)
+  //   return h(App)
+  // }
 })

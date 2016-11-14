@@ -28,10 +28,10 @@ export default {
     const request = require('axios')
     request.get('http://service.gamefy.cn/member/userinfo?key=23423fsdjewirwdsk3434eee989&wei=sitv&code=' + this.$route.query.code)
       .then(res => {
-        this.code = res
+        this.code = res.request.response
       })
       .catch(res => {
-        this.msg = res
+        this.msg = res.request.response
       })
     // this.msg = this.$route.query.code
   },

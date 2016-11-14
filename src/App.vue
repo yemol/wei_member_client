@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <img class="logo" src="./assets/logo.png">
     <router-view class="view one"></router-view>
     <router-view class="view one" name="a"></router-view>
-    
+
     <router-link to="/login">login</router-link>
     <router-link to="/">home</router-link>
     <router-link to="/userinfo">userinfo</router-link>
@@ -13,7 +12,6 @@
 <script>
 export default {
   data () {
-    console.log(this.$route)
     return {}
   }
   // components: {
