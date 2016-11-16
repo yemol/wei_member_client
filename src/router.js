@@ -3,11 +3,10 @@ import VueRouter from 'vue-router'
 import Login from './components/Login'
 import Welcome from './components/Welcome'
 import Hello from './components/Hello'
-import Userinfo from './components/Userinfo'
 
 const routes = [
   {
-    path: '/login',
+    path: '/Login',
     components: {
       default: Login,
       a: Hello
@@ -26,18 +25,12 @@ const routes = [
       default: Welcome,
       a: Hello
     }
-  },
-  {
-    path: '/userinfo',
-    components: {
-      default: Userinfo
-    }
   }
 ]
 
 const router = new VueRouter({
   routes,
-  mode: 'hash'
+  mode: 'history'
 })
 
 module.exports = router

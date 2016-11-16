@@ -4,6 +4,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
 import App from './App'
+import Script from './Script'
 
 Vue.use(VueRouter)
 
@@ -17,7 +18,11 @@ new Vue({
   computed: {
     ViewComponent () {
       console.log(this.currentRoute)
-      return App
+      if (this.currentRoute === '/userinfo') {
+        return Script
+      } else {
+        return App
+      }
     }
   },
   render (h) { return h(this.ViewComponent) }
