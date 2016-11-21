@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <router-view class="view one"></router-view>
-    <router-view class="view one" name="a"></router-view>
-
-    <router-link to="/login">login</router-link>
-    <router-link to="/">home</router-link>
-    <router-link to="/userinfo">userinfo</router-link>
+    <router-view></router-view>
   </div>
 </template>
 

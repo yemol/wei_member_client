@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <h4>{{ title }}</h4>
-    <h3>{{ code }}</h3>
+    <h4>{{ userinfo }}</h4>
+    <h3>{{ openid }}</h3>
     <div class="weui-cell weui-cell_vcode">
         <div class="weui-cell__hd">
             <label class="weui-label">手机号</label>
@@ -19,27 +19,31 @@
             <input class="weui-input" type="number" placeholder="请输入验证码">
         </div>
     </div>
-    <a href="http://service.gamefy.cn/member/redirect?wei=test&direct=1" class="weui-btn weui-btn_primary">注册</a>
+    <a href="javascript:void(0)" v-on:click="getName" class="weui-btn weui-btn_primary">注册</a>
 </template>
-
 <script>
 export default {
   created () {
-  },
-  data () {
     const request = require('axios')
     // 开始取得当前用户的openid
     request.get('http://service.gamefy.cn/member/userinfo?key=23423fsdjewirwdsk3434eee989&wei=sitv&code=' + this.$route.query.code)
       .then(res => {
-        this.code = res.request.response
+        this.openid = JSON.parse(res.request.response).openid
       })
       .catch(res => {
-        this.code = res
+        this.openid = 'error'
       })
-
+  },
+  data () {
+    var data = window.localStorage.hasOwnProperty('userinfo') ? window.localStorage.getItem('userinfo') : '{"openid": "","nickname": "","sex": 1,"language": "zh_CN","city": "","province": "","country": "","headimgurl": "","remark": ""}'
+    data = JSON.parse(data)
     return {
-      title: this.$route.query.state,
-      code: this.$route.query.code
+      openid: null,
+      userinfo: data
+    }
+  },
+  methods: {
+    getName: function () {
     }
   }
 }

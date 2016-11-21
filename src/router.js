@@ -2,28 +2,31 @@ import VueRouter from 'vue-router'
 
 import Login from './components/Login'
 import Welcome from './components/Welcome'
-import Hello from './components/Hello'
+import GetUserinfo from './components/GetUserinfo'
 
 const routes = [
   {
     path: '/Login',
     components: {
-      default: Login,
-      a: Hello
+      default: Login
     }
   },
   {
     path: '/',
     components: {
-      default: Login,
-      a: Hello
+      default: Welcome
     }
   },
   {
     path: '/Welcome',
     components: {
-      default: Welcome,
-      a: Hello
+      default: Welcome
+    }
+  },
+  {
+    path: '/GetUserinfo',
+    components: {
+      default: GetUserinfo
     }
   }
 ]
