@@ -4,25 +4,32 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
 import App from './App'
-import Script from './Script'
 
 Vue.use(VueRouter)
+
+const openidBox = {}
+const userinfoBox = {}
+const weixinBox = {}
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   data: {
-    currentRoute: window.location.pathname
+    openid: openidBox,
+    userinfo: userinfoBox,
+    weixin: weixinBox,
+    currentRoute: window.location.pathname,
+    auth: '23423fsdjewirwdsk3434eee989'
   },
   router,
   computed: {
     ViewComponent () {
-      console.log(this.currentRoute)
-      if (this.currentRoute === '/userinfo') {
-        return Script
-      } else {
-        return App
-      }
+      return App
+      // if (this.currentRoute === '/userinfo') {
+      //   return Script
+      // } else {
+      //   return App
+      // }
     }
   },
   render (h) { return h(this.ViewComponent) }
