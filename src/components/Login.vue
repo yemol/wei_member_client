@@ -1,5 +1,6 @@
 <template>
   <div class="loggin" v-bind:class="{ show: isEnd }">
+    <div><img src="static/logo.png" style="padding-bottom:30px;"/></div>
     <div class="weui-cell weui-cell_vcode">
         <div class="weui-cell__hd">
             <label class="weui-label">手机号</label>
@@ -25,9 +26,20 @@
     </div>
     <input type="hidden" v-model="openid" name="openidTXT" id="openidTXT" />
     <input type="hidden" v-model="userinfo" name="userinfoTXT" id="userinfoTXT" />
-    <a href="javascript:void(0)" v-on:click="registerUser()" class="weui-btn weui-btn_primary">注册</a>
+    <a href="javascript:;" v-on:click="registerUser()" class="weui-btn weui-btn_primary">注册</a>
+    <div class="js_dialog" id="warningDialog">
+      <div class="weui-mask"></div>
+      <div class="weui-dialog">
+        <div class="weui-dialog__bd">{{ warningMsg }}</div>
+        <div class="weui-dialog__ft">
+          <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="hideDialog()">知道了</a>
+        </div>
+      </div>
+    </div>
 </template>
 <script>
+const $ = require('webpack-zepto')
+
 export default {
   created () {
     const request = require('axios')
@@ -52,6 +64,8 @@ export default {
       .catch(res => {
         this.$root.$router.push('/Error')
       })
+
+    document.title = '新用户注册'
   },
   data () {
     // save current weixin name into session store
@@ -66,11 +80,38 @@ export default {
       verifyCode: '',
       verifyCodeInput: '',
       mobile: '',
-      password: ''
+      password: '',
+      warningMsg: ''
     }
   },
   methods: {
+    hideDialog: function () {
+      console.log($('#warningDialog'))
+      $('#warningDialog').hide(200)
+    },
     registerUser: function () {
+      // we need to check all input fields first.
+      if (this.mobile.length !== 11) {
+        this.warningMsg = '电话号码填写不正确，请重新填写！'
+        $('#warningDialog').show(200)
+        return
+      }
+      if (this.verifyCodeInput.length === 0) {
+        this.warningMsg = '请输入验证码！'
+        $('#warningDialog').show(200)
+        return
+      }
+      if (this.verifyCodeInput !== this.verifyCode) {
+        this.warningMsg = '验证码填写不正确，请重新填写！'
+        $('#warningDialog').show(200)
+        return
+      }
+      if (this.password.length < 6) {
+        this.warningMsg = '请至少输入6位密码！'
+        $('#warningDialog').show(200)
+        return
+      }
+
       const request = require('axios')
       // send out verify code
       request.get('http://service.gamefy.cn/member/register_user?mobile=' + this.mobile + '&wei=' + this.$root.$data.weixin + '&password=' + this.password + '&openid=' + this.openid + '&userinfo=' + encodeURIComponent(JSON.stringify(this.userinfo)), {

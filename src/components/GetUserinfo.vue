@@ -1,6 +1,9 @@
 <template>
-  <div class="hello">
-    正在登陆中...
+  <div style="display:block;width:100%;height:100%">
+    <div class="weui-loadmore">
+      <i class="weui-loading"></i>
+      <span class="weui-loadmore__tips">正在加载</span>
+    </div>
   </div>
 </template>
 <script>
@@ -36,7 +39,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  color: #42b983;
-}
+
 </style>

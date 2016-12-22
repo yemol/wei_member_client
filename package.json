@@ -15,6 +15,7 @@
     "axios": "^0.15.0",
     "vue": "^2.0.1",
     "vue-router": "^2.0.0",
+    "webpack-zepto": "^0.0.1",
     "weui": "^1.0.2"
   },
   "devDependencies": {
